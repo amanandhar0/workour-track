@@ -47,6 +47,8 @@ async function ExercisesContent({
   const totalPages = await getTotalExercisePages(perPage)
   const data = await getExercisesPerPage(page, perPage)
 
+  console.log("Fetched exercises:", data) // ✅ Add this
+
   return (
     <>
       <div className="w-full">
