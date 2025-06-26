@@ -17,3 +17,5 @@ next-env.d.ts
 
 # typescript
 *.tsbuildinfo
+
+.env*
