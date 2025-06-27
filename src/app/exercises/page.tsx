@@ -65,6 +65,15 @@ async function ExercisesContent({
   )
 }
 
+function normalizeImageName(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, "_")           // replace spaces with underscores
+    .replace(/\//g, "_")            // replace slashes with underscores
+    .replace(/[^a-z0-9_-]/g, "")   // allow letters, numbers, underscores, and hyphens
+    + ".jpg"
+}
+
 function ExercisesContentSkeleton() {
   return (
     <div className="w-full">
@@ -77,12 +86,14 @@ function ExercisesContentSkeleton() {
 }
 
 function ExerciseCard({ exercise }: { exercise: ExerciseData }) {
+  const imageName = normalizeImageName(exercise.name)
+
   return (
     <Link href={`/exercises/${encodeURIComponent(exercise.name)}`}>
       <div className="flex items-center justify-between rounded-md p-4">
         <div className="flex items-center space-x-4">
           <Image
-            src={`/exercises/${exercise.image}`}
+            src={`/exercises/${imageName}`}
             alt={`${exercise.name} Image`}
             width={100}
             height={100}

@@ -69,6 +69,15 @@ export default async function Exercise(props: {
   )
 }
 
+function normalizeImageName(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, "_")           // spaces → underscores
+    .replace(/\//g, "_")            // slashes → underscores
+    .replace(/[^a-z0-9_-]/g, "")   // allow letters, digits, underscores, hyphens only
+    + ".jpg"
+}
+
 async function ExerciseContent({ exercise }: { exercise: string }) {
   const data = await getSpecificExercise(exercise)
 
@@ -77,7 +86,7 @@ async function ExerciseContent({ exercise }: { exercise: string }) {
       <main className="w-full max-w-4xl">
         <div className="grid gap-6">
           <Image
-            src={`/exercises/${data.image}`}
+            src={`/exercises/${normalizeImageName(data.name)}`}
             width={800}
             height={600}
             alt={`${exercise} Image`}
