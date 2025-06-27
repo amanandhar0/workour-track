@@ -107,5 +107,5 @@ function normalizeImageName(name: string) {
     .toLowerCase()
     .replace(/\s+/g, "_")
     .replace(/\//g, "_")
-    .replace(/[^a-z0-9_\-]/g, "") + ".jpg"
+    .replace(/[^a-z0-9_-]/g, "") + ".jpg"
 }
