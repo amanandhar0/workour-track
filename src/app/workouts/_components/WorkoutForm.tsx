@@ -17,6 +17,7 @@ import {
   type WorkoutTargets,
 } from "@/types/workoutForm"
 
+
 interface WorkoutFormProps {
   workoutData: PlanData
   workoutTargets: WorkoutTargets

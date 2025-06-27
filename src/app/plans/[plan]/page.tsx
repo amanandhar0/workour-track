@@ -95,13 +95,13 @@ export default async function Plan(props: {
   )
 }
 
+
 function normalizeImageName(name: string) {
   return name
     .toLowerCase()
-    .replace(/\s+/g, "_")      // spaces → underscores
-    .replace(/\//g, "_")       // slashes → underscores
-    .replace(/[^a-z0-9_\-]/g, "") // remove other special chars except hyphen
-    + ".jpg"
+    .replace(/\s+/g, "_")
+    .replace(/\//g, "_")
+    .replace(/[^a-z0-9_-]/g, "") + ".jpg"
 }
 
 function PlanSkeleton() {
@@ -112,3 +112,4 @@ function PlanSkeleton() {
     </div>
   )
 }
+
