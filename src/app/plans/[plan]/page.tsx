@@ -68,7 +68,7 @@ export default async function Plan(props: {
                 <Card key={index} className="overflow-hidden">
                   <div className="relative aspect-video">
                     <Image
-                      src={`/exercises/${exercise.image}`}
+                      src={`/exercises/${normalizeImageName(exercise.name!)}`}
                       alt={exercise.name!}
                       className="h-full w-full"
                       width={500}
@@ -93,6 +93,15 @@ export default async function Plan(props: {
       </div>
     </Suspense>
   )
+}
+
+function normalizeImageName(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, "_")      // spaces → underscores
+    .replace(/\//g, "_")       // slashes → underscores
+    .replace(/[^a-z0-9_\-]/g, "") // remove other special chars except hyphen
+    + ".jpg"
 }
 
 function PlanSkeleton() {

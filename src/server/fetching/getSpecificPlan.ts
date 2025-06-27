@@ -16,6 +16,14 @@ interface TempPlanData {
   }[]
 }
 
+function normalizeImageName(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, "_")
+    .replace(/\//g, "_")
+    .replace(/[^a-z0-9_\-]/g, "") + ".jpg"
+}
+
 export default async function getSpecificPlan(planId: string) {
   const supabase = await createSupabaseServerClient()
 
@@ -56,18 +64,19 @@ export default async function getSpecificPlan(planId: string) {
 
   // reformat the data to match the PlanData type
   const combinedData: PlanData = {
-    id: data.id,
-    name: data.name,
-    notes: data.notes,
-    exercises: data.plan_exercise.map((plan_exercise) => {
-      return {
-        id: plan_exercise.exercise_id,
-        sets: plan_exercise.sets,
-        name: plan_exercise.exercise.name,
-        image: plan_exercise.exercise.image,
-      }
-    }),
-  }
+  id: data.id,
+  name: data.name,
+  notes: data.notes,
+  exercises: data.plan_exercise.map((plan_exercise) => {
+    return {
+      id: plan_exercise.exercise_id,
+      sets: plan_exercise.sets,
+      name: plan_exercise.exercise.name,
+      // Normalize here once and for all
+      image: normalizeImageName(plan_exercise.exercise.name),
+    }
+  }),
+}
 
   return combinedData
 }

@@ -40,7 +40,7 @@ export default async function Workout(props: {
                 <div className="grid gap-4 md:grid-cols-[300px_1fr]">
                   <div className="relative h-[200px] md:h-full">
                     <Image
-                      src={`/exercises/${exercise.exercise.image}`}
+                      src={`/exercises/${normalizeImageName(exercise.exercise.name)}`}
                       alt={exercise.exercise.name}
                       fill
                       className="object-cover"
@@ -100,4 +100,12 @@ export default async function Workout(props: {
       </div>
     </>
   )
+}
+
+function normalizeImageName(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, "_")
+    .replace(/\//g, "_")
+    .replace(/[^a-z0-9_\-]/g, "") + ".jpg"
 }

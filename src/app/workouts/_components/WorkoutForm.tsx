@@ -60,7 +60,7 @@ export default function WorkoutForm({
                 <div className="grid gap-4 md:grid-cols-[300px_1fr]">
                   <div className="relative h-[200px] md:h-full">
                     <Image
-                      src={`/exercises/${exercise.image}`}
+                      src={`/exercises/${normalizeImageName(exercise.name!)}`}
                       alt={exercise.name!}
                       fill
                       className="object-cover"
@@ -167,4 +167,14 @@ export default function WorkoutForm({
       </div>
     </div>
   )
+}
+
+
+function normalizeImageName(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, "_")      // spaces → underscores
+    .replace(/\//g, "_")       // slashes → underscores
+    .replace(/[^a-z0-9_\-]/g, "") // remove other special chars except hyphen
+    + ".jpg"
 }
