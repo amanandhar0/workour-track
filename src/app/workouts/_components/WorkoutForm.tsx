@@ -175,6 +175,6 @@ function normalizeImageName(name: string) {
     .toLowerCase()
     .replace(/\s+/g, "_")      // spaces → underscores
     .replace(/\//g, "_")       // slashes → underscores
-    .replace(/[^a-z0-9_\-]/g, "") // remove other special chars except hyphen
+    .replace(/[^a-z0-9_-]/g, "") // remove other special chars except hyphen
     + ".jpg"
 }
